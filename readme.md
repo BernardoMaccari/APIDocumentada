@@ -79,3 +79,22 @@ Criar arquivo app.js na pasta src
 ```
 touch src/app.js
 ```
+
+## Lembrar de colocar o node_modules
+
+No git bash
+```
+npm i
+```
+
+## Criar o arquivo .env e o .env.exemple
+
+```
+touch .env
+```
+
+* Criar arquivo para salvar as variaveis necessarias da aplicação sem os valores
+ 
+```
+touch .env.example
+```

@@ -1,7 +1,12 @@
 // Importar pacote do express
 const express = require('express');
+
 //Instanciar o express na variavelapp
 const app = express();
+
+//Importar as rotas para serem executadas na aplicação
+const router = require('./routes/crudRouter')
+
 // Importar o pacote dotenv
 const dotenv = require('dotenv').config();
 
