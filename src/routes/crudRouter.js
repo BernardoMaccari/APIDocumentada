@@ -3,11 +3,10 @@ const {Router} = require('express');
 
 //Instanciar o router na variavel router
 const router = Router();
+// Importar funções do controllers para a rota acessar as funções
+const { listarDados } = require('../controllers/controller');
 
-router.get('/api', (request, response) => {
-    response.send('Retorno de informações do banco de dados');
-    console.log('get')
-});
+router.get('/api', listarDados); 
 
 router.post('/api',(request, response) => {
     response.send('Método utilizado para salvar informações');
