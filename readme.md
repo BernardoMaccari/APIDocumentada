@@ -120,32 +120,23 @@ const {Router} = require('express');
 
 //Instanciar o router na variavel router
 const router = Router();
-
 // Importar funções do controllers para a rota acessar as funções
-const { listarDados } = require('../controllers/controller');
+const { 
+    listarDados,
+    gravarDados,
+    atualizarDados,
+    deletarDados
+ } = require('../controllers/controller');
 
-router.get('/api', listarDados); 
+router.get('/listar', listarDados); 
 
-router.post('/api',(request, response) => {
-    response.send('Método utilizado para salvar informações');
-    console.log('post')
-    console.log(request)
-})
+router.post('/gravar', gravarDados);
 
-router.put('/api/:id',(request, response) => {
-    response.send('Método utilizado para editar informações');
-    console.log('put');
-    console.log('id: ', request.params.id);
-})
+router.put('/atualizar/:id', atualizarDados);
 
-router.delete('/api/:id',(request, response) => {
-    response.send('Método utilizado para deletar informações');
-    console.log('delete');
-    console.log('id: ', request.params.id);
-})
+router.delete('/deletar/:id', deletarDados);
 
 module.exports = router;
-
 ```
 
 ### CRIAÇÃO DE CONTROLLERS
@@ -168,10 +159,25 @@ touch src/controllers/controllers.js
 ```
 function  listarDados(request, response) {
     response.send('Retorno de informações do banco de dados');
-    console.log('get')
+}
+
+function gravarDados(request, response) {
+    response.send('Método utilizado para salvar informações');
+}
+
+function atualizarDados(request, response) {
+    response.send('Método utilizado para editar informações');
+}
+
+function deletarDados(request, response) {
+    response.send('Método utilizado para deletar informações');
 }
 
 module.exports = {
-    listarDados
+    listarDados,
+    gravarDados,
+    atualizarDados,
+    deletarDados
 }
 ```
+
