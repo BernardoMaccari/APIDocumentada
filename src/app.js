@@ -2,6 +2,7 @@
 const express = require('express');
 //Instanciar o express na variavelapp
 const app = express();
+app.use(express.json());
 
 //Importar as rotas para serem executadas na aplicação
 const crudRouter = require('./routes/crudRouter')
@@ -18,6 +19,7 @@ app.use('/api', alunosRouter);
 
 //Setar a porta do servidor, a partir do arquivo .env
 app.set('port', process.env.PORT)
+
 
 //Exportar as configurações do app para outros arquivos acessarem
 module.exports = app;

@@ -37,7 +37,7 @@ async function cadastrarAluno(request, response) {
     // 2 passo: montar query para inserir os dados
     // 3 passo: tentar executar a ação no banco
     // 4 passo: definir retornos da requisição
-
+    console.log(request.body)
     // recuperando dados da requisição
     const params = Array(
         request.body.nome,
