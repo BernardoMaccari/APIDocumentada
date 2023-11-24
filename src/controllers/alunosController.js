@@ -63,7 +63,7 @@ async function cadastrarAluno(request, response) {
 
 async function update (request, response) {
     //comando sql
-    const query = "UPDATE alunos nome = ?, dt_nascimento = ?, time_do_coracao = ? WHERE id =?; ";
+    const query = "UPDATE alunos SET nome = ?, dt_nascimento = ?, time_do_coracao = ? WHERE id =?; ";
 
     const params = Array(
         request.body.nome,
@@ -81,6 +81,72 @@ async function update (request, response) {
                 message: "Aluno atualizado",
                 data: results
             })
+        } else {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "Deu ruim amigo",
+                mysql: err
+            })
+        }
+    })
+}
+
+async function deleteAluno(request, response) {
+    //comando sql
+    const query = "DELETE FROM alunos WHERE id = ?; ";
+
+    const params = Array(
+        request.params.id
+    );
+
+    connection.query(query, params, (err,results) => {
+        if (results) {
+            response
+            .status(200)
+            .json({
+                success: true,
+                message: "Aluno retirado com sucesso!",
+                data: results
+            })
+        } else {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "Aluno não retirado!",
+                mysql: err
+            })
+        }
+    })
+}
+
+async function selecionarAluno(request, response) {
+    //comando sql
+    const query = "SELECT * FROM alunos WHERE id = ?; ";
+
+    const params = Array(
+        request.params.id
+    );
+
+    connection.query(query, params, (err,results) => {
+        if (results) {
+            response
+            .status(200)
+            .json({
+                success: true,
+                message: "Aluno achado com sucesso!",
+                data: results
+            })
+        } else {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "Aluno não achado!",
+                mysql: err
+            })
         }
     })
 }
@@ -88,5 +154,7 @@ async function update (request, response) {
 module.exports = {
     listarUsuarios,
     cadastrarAluno,
-    update
+    update,
+    deleteAluno,
+    selecionarAluno
 };

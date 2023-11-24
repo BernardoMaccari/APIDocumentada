@@ -6,11 +6,15 @@ const router   = Router();
 const {
     listarUsuarios,
     cadastrarAluno,
-    update
+    update,
+    deleteAluno,
+    selecionarAluno,
 } = require('../controllers/alunosController');
 
 router.get('/alunos', listarUsuarios);
 router.post('/alunos/create', cadastrarAluno);
 router.put('/alunos/update/:id',update);
+router.delete('/alunos/delete/:id', deleteAluno);
+router.get('/alunos/selecionar/:id', selecionarAluno);
 
 module.exports = router;
