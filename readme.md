@@ -33,8 +33,13 @@ npm i express nodemon dotenv mysql2
 * express: será o servidor da API
 * nodemon: atualizar os arquivos alternados sem parar o servidor
 * dotenv: gerenciador de variáveis de ambiente
+* mysql2: integrar aplicação com o banco de dados
 
 Informar arquivos e pastas no .gitignore
+```
+touch .gitignore
+```
+
 ```
 node_modules
 .env
@@ -49,16 +54,13 @@ touch src/server.js
 ```
 Configurar o servidor
 ```
-// Importar pacote do express
-const express = require('express');
-//Instanciar o express na variavelapp
-const app = express();
-// Importar o pacote dotenv
-const dotenv = require('dotenv').config();
-//Definir a porta do servidor
-const PORT = process.env.PORT || 3005;
+// Importar o arquivo se configuração(app.js)
+const app = require('./app');
 
-//Testar servidor
+// Importar a porta do servidor 
+const PORT = app.get('port');
+
+// Testar servidor 
 app.listen(PORT, () => console.log(`Running at port ${PORT}`))
 ```
 
