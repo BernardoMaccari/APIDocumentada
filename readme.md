@@ -22,10 +22,32 @@ Fazer o arquivo .gitignore: arquivos e pastas que não vão para o github
 ```
 touch .gitignore
 ```
+
 Fazer arquivo .env: armazenara as variaveis do ambiente
 ```
 touch .env
 ```
+
+Fazer arquivo .env.exemple
+```
+touch .env.example
+```
+* arquivo definidor das variaveis de ambiente sem valores
+
+colar as variaveis no .env.example
+```
+#DEFINIÇÃO DA PORTA DE SERVIDOR EXPRESS
+PORT = '3009'
+
+#VARIAVEIS DE CONEXÃO COM BANCO
+DB_HOST = 'localhost'
+DB_USER = 'root'
+DB_PASSWORD = 'root'
+DB_DATABASE = 'turma_2at'
+DB_PORT = '3308'
+```
+
+
 Instalar pacotes da API
 ```
 npm i express nodemon dotenv mysql2
@@ -64,24 +86,56 @@ const PORT = app.get('port');
 app.listen(PORT, () => console.log(`Running at port ${PORT}`))
 ```
 
+Criar arquivo app.js na pasta src
+```
+touch src/app.js
+```
+* arquivo que configura a aplicação
 
-Criar comando para rodar o servidor
+colar código de config no arquivo app
+```
+// Importar pacote do express
+const express = require('express');
+//Instanciar o express na variavelapp
+const app = express();
+app.use(express.json());
+
+//Importar as rotas para serem executadas na aplicação
+const crudRouter = require('./routes/crudRouter')
+//Importar as rotas para serem executadas na aplicação
+const alunosRouter = require('./routes/alunosRouter')
+
+// Importar o pacote dotenv
+const dotenv = require('dotenv').config();
+
+// Habilitar a utilização do crudRouter
+app.use('/api', crudRouter);
+// Habilitar a utilização do alunosRouter
+app.use('/api', alunosRouter);
+
+//Setar a porta do servidor, a partir do arquivo .env
+app.set('port', process.env.PORT)
+
+
+//Exportar as configurações do app para outros arquivos acessarem
+module.exports = app;
+```
+
+Criar comando para rodar o servidor no arquivo 'package.json'
 ```
 "start":"nodemon src/server.js"
 ```
+* substituir o comando test todo pelo "start":"nodemon src/server.js", comando responsavel por rodar a API
 
 Rodar o comando no terminal
 ```
 npm run start
 ```
 
-## Criar estrutura para o projeto
-
-Criar arquivo app.js na pasta src
+para o server no git bash
 ```
-touch src/app.js
+CTRL + c
 ```
-
 ## Lembrar de colocar o node_modules
 
 No git bash
